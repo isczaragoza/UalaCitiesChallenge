@@ -174,32 +174,3 @@ para simular una vista tipo stream, que va mostrando como aparecen los elementos
 componente particular implenté un WorkManager que permite que la descarga persista aunque
 se cierre la aplicación o la aplicación tenga cambios de configuración o rotaciones de pantalla.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
