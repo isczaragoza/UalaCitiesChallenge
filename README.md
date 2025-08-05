@@ -1,0 +1,205 @@
+David Zaragoza Garcia 
+isczaragoza@gmail.com
+
+Android Developer | Software Arquitect
+
+Desafio técnico para el proceso de selección para la vacante Senior Android Developer en la empresa Ualá.
+
+El proyecto se realizó con un enfoque nativo para el sistema operativo Android.
+
+Con el lenguaje de programación Kotlin
+
+Para abordar el diseño de la aplicación utilicé los siguientes elementos:
+
+- Clean Architecture (Se definen las siguientes capas: UI, Infrastructure, Domain, Data)
+- DDD
+- MVVM patrón de arquitectura
+- Patrón Repository
+- Modularización por feature y layer
+
+Sobre proceso de la definición de arquitectura tomé la decision de implentar la modularización por feature - layer
+para respetar los principios de cohesion y bajo acoplamiento.
+Y separación de responsabilidades.
+Una vez realizada la modularización implementé los principios de la arquitectura limpia
+a cada capa.
+La capa de UI implementa el patrón arquitectonico MVVM
+La capa de datos tiene implementado el patron repositorio.
+La capa de dominio respeta principios DDD
+
+Seguí los principios S.O.L.I.D.
+
+Definiciones de cada capa:
+
+Features: 
+Código relacionado a la vista de cada funcionalidad, viewmodels, estados.
+
+Infrastructure: 
+Código relacionado a implementaciones especificas del Framework de Android,
+implementaciones especificas de clientes HTTP, motores de Base De Datos, ORM, otros tipos
+de persistencias, servicios.
+
+Data: 
+Código relacionado a la forma en que la aplicación maneja la información respecto
+a funtes locales, fuentes remotas, sincronización, el trato que se le da a la información
+y lógica de datos.
+
+Domain: Código relacionado al negocio, reglas de negocio, lógica de negocio, interfaces 
+de servicios, interfaces de repositorios, interfaces de managers, modelos y casos de uso.
+
+Diágrama de alto nivel de la estructura del proyecto:
+
+___________________________________________________________________
+|                          Features                               |
+|                 CityList, CityMap, CityDetail                   |
+|                                                                 |
+|_________________________________________________________________|
+                              |
+                              |
+                              |
+                              |
+                              |
+                              V
+___________________________________________________________________
+|                          Infrastructure                         |
+|         Framework/HTTP/Database/DesignSystem/UiTheme)           |
+|                                                                 |
+|_________________________________________________________________|
+                              |
+                              |
+                              |
+                              |
+                              |
+                              |
+                              V
+___________________________________________________________________
+|                           Data                                  |
+|     RepositoriesImpl/DataSources/DTOs/@Entities/Mappers         |
+|                                                                 |
+|_________________________________________________________________|
+                              |
+                              |
+                              |
+                              |
+                              |
+                              V
+___________________________________________________________________
+|                          Domain                                 |
+|            UseCases/Models/Repositories/Interfaces              |
+|                                                                 |
+|_________________________________________________________________|
+
+Tecnologias clave:
+En esta sección quiero mencionar algunas de las técnologias que implementé
+para el desarrollo.
+
+- Peticiones de red: 
+Retrofit
+
+- Persistencia local:
+RoomDB
+
+- Inyección de dependencias:
+Dagger Hilt
+
+- Serialización y conversión:
+KotlinX Serializer
+Gson
+
+Concepto de negocio:
+Aplicación (producto) que descarga una lista de ciudades de internet
+y se muestran en pantalla.
+
+Reglas de negocio:
+Se ordenan por nombre y pais, se muestran en pantalla ordenadas,
+se deben poder filtrar por nombre completo o por fracciones de texto
+a través de un campo de busqueda, cada ciudad se puede marcar como
+favorita y esa marca debe persistir a través del tiempo y sesiones.
+Cada ciudad se debe mostar con un marcador en un mapa en una pantalla extra.
+
+Lenguaje de negocio:
+Ciudad, Mapa, Detalles, Locación, Latitud, Longitud...
+
+Reto técnico:
+El reto técnico me gustaría mencionar que recae sobre la cantidad de 
+información que va a ser descargada desde internet, al inicio el dato
+que se tenía era que se iba a descargar un archivo de 200 000 registros
+esto mencionado en la propia documentación proporcionada.
+
+Limitación técnica:
+No todos los dispositivos tienen la capacidad de manejar en tiempo de ejecución
+y memoria registros tan grandes.
+
+Problema de rendimiento:
+Derivado de la limitación técnica, eso puede causar problemas de rendimiento
+visibles al usuario como lag, mensajes como ANR o el peor escenario desbordamiento
+de memoria causando que la aplicación tenga un fallo fatal cerrandose.
+
+Desafio de optimización:
+Ya que se conocen los detalles de producto y desarrollo, me gusta definir la estrategia
+para abordar el desarrollo de manera optima y que cumpla satifactoriamente con el
+requerimiento.
+
+Solución:
+Descargar datos de manera progresiva e insertar gradualmente la información en la 
+base de datos local, llevando un registro del progreso.
+
+Reto de escalabilidad:
+Que pueda manejar registros de información aun mas grandes que los del reto proporiconado.
+
+Implementaciones Clave:
+
+Proceso de sincronización Red/Base de datos:
+
+Para el escenario de la aplicación intento descargar el JSON de 200k aproximadamente de una forma optima,
+para eso probé multiples enfoques como Json.decodeFromString, pero era susceptible a problemas de
+memoria ya que se guardan los registros en un String y eso no es muy poco optimo. 
+También probé enfoques de usar estructuras de datos con mejor rendimiento como HashMap, 
+pero debido a las multiples reglas de negocio incluso usando esas estructuras operar con ellas es 
+lento y susceptible a errores.
+Al final me decidí por un proceso de Streaming basado en Retrofit, que aunque requirió mayor desarrollo
+fue una solución funcional, optima y escalable.
+El proceso en Streaming permite descargar grandes volumenes de información de manera progresiva para 
+poder procesar desde DTO al tipo de objeto necesario para tu capa de datos/persistencia sin guardar nada en 
+memoria.
+Dando detalle del proceso, se leen los bytes, se parsean y se insertan en base de datos progresivamente.
+Con esta solución se puede escalar a volumenes de datos muy grandes sin presentar ningun problema, 
+podríamos decir que se adapta a casi cualquier nuevo requerimiento de datos (si se respeta el formato JSON)
+
+Extras:
+- Para mostrar la información en pantalla decidí mostrar una barra de carga que muestra en tiempo real
+el proceso de descarga/almacenamiento.
+- Tambien para mostrar la lista de ciudades implementé una consulta que me notificara los cambios
+para simular una vista tipo stream, que va mostrando como aparecen los elementos.
+- Para mantener la información actualizada y que no estuviera atada al ciclo de vida de un
+componente particular implenté un WorkManager que permite que la descarga persista aunque
+se cierre la aplicación o la aplicación tenga cambios de configuración o rotaciones de pantalla.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
