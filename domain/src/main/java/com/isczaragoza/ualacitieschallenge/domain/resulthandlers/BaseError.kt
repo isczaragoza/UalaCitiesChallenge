@@ -1,0 +1,3 @@
+package com.isczaragoza.ualacitieschallenge.domain.resulthandlers
+
+interface BaseError

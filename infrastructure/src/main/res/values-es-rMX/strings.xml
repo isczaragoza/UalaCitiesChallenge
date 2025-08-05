@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">UalaCitiesChallenge</string>
+    <!-- City Card Item -->
+    <string name="city_card_item_location">Lat: %1$s Lon: %1$s</string>
+    <!-- City Sync Worker -->
+    <string name="city_sync_worker_notification_name">Descargando Ciudades</string>
+    <!-- Connection Toast -->
+    <string name="connection_lost">Se perdió la conexión</string>
+    <string name="connection_recovered">Conexión restuarada</string>
+    <!-- City List Screen -->
+    <string name="city_list_screen_empty_state">No hay ciudades</string>
+    <!-- City Map Screen-->
+    <string name="city_map_screen_empty_state">Seleccióna una ciudad</string>
+    <string name="city_map_screen_pin">Ciudad: %1$s</string>
+    <string name="city_map_screen_pin_location">Lat: %1$s Lon: %1$s</string>
+    <!-- City Detail Screen-->
+    <string name="city_detail_screen_no_info">No hay información sobre esa ciudad</string>
+    <!-- Global Strings -->
+    <string name="progress_string">Progreso: %1$s</string>
+    <string name="empty_string" />
+    <string name="error">Error</string>
+    <string name="load_error">Error de carga</string>
+</resources>
