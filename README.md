@@ -175,14 +175,16 @@ componente particular implenté un WorkManager que permite que la descarga persi
 se cierre la aplicación o la aplicación tenga cambios de configuración o rotaciones de pantalla.
 
 
-<img width="345" height="693" alt="Captura de pantalla 2025-08-04 a la(s) 10 39 46 p m" src="https://github.com/user-attachments/assets/0ff473e5-506e-4228-b5a6-85dd3047f914" />
-<img width="338" height="697" alt="Captura de pantalla 2025-08-04 a la(s) 10 39 30 p m" src="https://github.com/user-attachments/assets/ccdee1de-0042-40a8-bca6-19a6fbe81405" />
-<img width="328" height="691" alt="Captura de pantalla 2025-08-04 a la(s) 10 38 54 p m" src="https://github.com/user-attachments/assets/6c4d8404-84c9-4cb8-b2ec-7eb2e3764157" />
-<img width="353" height="702" alt="Captura de pantalla 2025-08-04 a la(s) 10 38 10 p m" src="https://github.com/user-attachments/assets/6a656a68-24bc-4465-bd5b-c9aca8df6f92" />
-<img width="344" height="692" alt="Captura de pantalla 2025-08-04 a la(s) 10 37 57 p m" src="https://github.com/user-attachments/assets/66fd5055-1ebe-4bcc-8e03-50a523c571be" />
+
 <img width="348" height="692" alt="Captura de pantalla 2025-08-04 a la(s) 10 36 13 p m" src="https://github.com/user-attachments/assets/e18b44b0-e02c-48d0-a2f5-84f477d8ea55" />
-<img width="330" height="691" alt="Captura de pantalla 2025-08-04 a la(s) 10 51 17 p m" src="https://github.com/user-attachments/assets/6b30f2fd-8eeb-439b-9497-f30d93717da9" />
+<img width="344" height="692" alt="Captura de pantalla 2025-08-04 a la(s) 10 37 57 p m" src="https://github.com/user-attachments/assets/66fd5055-1ebe-4bcc-8e03-50a523c571be" />
+<img width="353" height="702" alt="Captura de pantalla 2025-08-04 a la(s) 10 38 10 p m" src="https://github.com/user-attachments/assets/6a656a68-24bc-4465-bd5b-c9aca8df6f92" />
+<img width="328" height="691" alt="Captura de pantalla 2025-08-04 a la(s) 10 38 54 p m" src="https://github.com/user-attachments/assets/6c4d8404-84c9-4cb8-b2ec-7eb2e3764157" />
+<img width="338" height="697" alt="Captura de pantalla 2025-08-04 a la(s) 10 39 30 p m" src="https://github.com/user-attachments/assets/ccdee1de-0042-40a8-bca6-19a6fbe81405" />
+<img width="345" height="693" alt="Captura de pantalla 2025-08-04 a la(s) 10 39 46 p m" src="https://github.com/user-attachments/assets/0ff473e5-506e-4228-b5a6-85dd3047f914" />
 <img width="327" height="691" alt="Captura de pantalla 2025-08-04 a la(s) 10 48 35 p m" src="https://github.com/user-attachments/assets/76380b7d-e53c-42d3-907c-89b52b87229a" />
 <img width="338" height="695" alt="Captura de pantalla 2025-08-04 a la(s) 10 40 39 p m" src="https://github.com/user-attachments/assets/f0b6bda2-82d0-4a80-b655-202835ea32c9" />
+<img width="330" height="691" alt="Captura de pantalla 2025-08-04 a la(s) 10 51 17 p m" src="https://github.com/user-attachments/assets/6b30f2fd-8eeb-439b-9497-f30d93717da9" />
+
 
 
