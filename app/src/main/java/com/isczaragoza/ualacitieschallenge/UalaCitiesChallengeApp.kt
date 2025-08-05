@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -56,7 +57,7 @@ import kotlinx.coroutines.launch
 internal fun UalaCitiesChallengeApp(isConnected: Boolean) {
     val snackbarHostState = remember { SnackbarHostState() }
     val configuration = LocalConfiguration.current
-    var lastStateConnection = true
+    var lastStateConnection by rememberSaveable { mutableStateOf(true) }
     val isLandScape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
     val navController = rememberNavController()
     println("Is Connected: $isConnected")
@@ -66,11 +67,11 @@ internal fun UalaCitiesChallengeApp(isConnected: Boolean) {
             SnackbarHost(hostState = snackbarHostState) { data ->
                 Snackbar(
                     containerColor =
-                    if (data.visuals.message == stringResource(R.string.connection_recovered)) {
-                        GreenA400
-                    } else {
-                        YellowA400
-                    },
+                        if (data.visuals.message == stringResource(R.string.connection_recovered)) {
+                            GreenA400
+                        } else {
+                            YellowA400
+                        },
                     contentColor = Grey800,
                     shape = RoundedCornerShape(8.dp),
                     modifier = Modifier.padding(8.dp)
@@ -98,6 +99,7 @@ internal fun UalaCitiesChallengeApp(isConnected: Boolean) {
         }
     LaunchedEffect(isConnected) {
         if (isConnected.not()) {
+            lastStateConnection = false
             snackbarHostState.showSnackbar(
                 message = message,
                 duration = SnackbarDuration.Indefinite
@@ -113,12 +115,12 @@ internal fun UalaCitiesChallengeApp(isConnected: Boolean) {
             }
             if (lastStateConnection.not() && isConnected) {
                 lastStateConnection = true
+                snackbarHostState.showSnackbar(
+                    message = message,
+                    duration = SnackbarDuration.Short
+                )
                 return@LaunchedEffect
             }
-            snackbarHostState.showSnackbar(
-                message = message,
-                duration = SnackbarDuration.Short
-            )
         }
     }
 }
@@ -308,9 +310,9 @@ private fun ListDetailPaneApproach(modifier: Modifier = Modifier) {
     val navigator =
         rememberListDetailPaneScaffoldNavigator<Any>(
             scaffoldDirective =
-            calculatePaneScaffoldDirectiveWithTwoPanesOnMediumWidth(
-                currentWindowAdaptiveInfo()
-            )
+                calculatePaneScaffoldDirectiveWithTwoPanesOnMediumWidth(
+                    currentWindowAdaptiveInfo()
+                )
         )
     NavigableListDetailPaneScaffold(
         modifier = modifier,
