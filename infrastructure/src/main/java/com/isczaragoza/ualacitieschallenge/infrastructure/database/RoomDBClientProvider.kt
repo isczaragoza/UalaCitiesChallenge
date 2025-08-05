@@ -12,6 +12,10 @@ class RoomDBClientProvider @Inject constructor(@ApplicationContext val context: 
     DBClientProvider<UalaCitiesChallengeRoomDB> {
     override fun provideDBClient(): UalaCitiesChallengeRoomDB {
 
+        /**
+         * Triggers de sincronización generados manualmente en caso de no usar la notación @Fts4
+         * se debe utilizar una sola solución triggers/@Fts4, no ambas.
+         * */
         val triggersSQL = listOf(
             """
     CREATE TRIGGER IF NOT EXISTS cityentity_ai AFTER INSERT ON CityEntity BEGIN

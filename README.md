@@ -165,6 +165,25 @@ Dando detalle del proceso, se leen los bytes, se parsean y se insertan en base d
 Con esta solución se puede escalar a volumenes de datos muy grandes sin presentar ningun problema, 
 podríamos decir que se adapta a casi cualquier nuevo requerimiento de datos (si se respeta el formato JSON)
 
+Proceso de ordenamiento y filtrado:
+El proceso de ordenamiento lo delegué a la capa de datos, creando en el DAO de Retrofit la consulta (SELECT)
+para ordenar por nombre, pais y finalmente id en forma ascendente y la condicion (LIKE) para filtrar por string.
+Por qué tomé esta decisión? Para evitar cargar toda la consulta en un HashMap o Array y recaer de nuevo
+en los problemas de memoria o manejo de estructuras demasiado cargadas de información, incluso limitando
+el SELECT o implementando el páginado, ordenear sobre las estructuras de datos no es una opción muy optima.
+Además el filtrado es un segundo proceso de iteración/busqueda sobre la estructura.
+
+Para este enfoque de delegar la responsabilidad al DAO, exploré varios enfoques, entre ellos los siguientes:
+ - La primera posible solución fue implementar un sistema FTS4 para optimizar todo el proceso de 
+   ordenamiento y filtrado, en teoria esta es la opción mas conveniente por rendimiento, pero por
+   los requerimientos del producto en el filtrado de datos, donde explicitamente se solicita que
+   se compare por substrings "a", "ab", "alb", "me", etc, no por coincidencias dentro del string(nombre),
+   esta solución no es compatible, ya que tokeniza y busca todas las coincidencias dentro del string,
+   devoliendo por ejemplo para el string "me" coincidencias tales como: "america", "mexico", "amecameca", etc...
+   Descartando esta solución por temas de diseño.
+ - Al final la solución elegida fue usar Entidades normales, crear los indices correspondientes para
+   optimizar la busqueda y declarando los operadores de ordenamiento.
+
 Extras:
 - Para mostrar la información en pantalla decidí mostrar una barra de carga que muestra en tiempo real
 el proceso de descarga/almacenamiento.
